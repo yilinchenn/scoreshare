@@ -5,15 +5,46 @@
     <title>Institution View</title>
   </head>
   <body>
-    <button onclick="App.addRecord(); return false;"> Add Record</button>
-    <form class='get_record_form' onsubmit="App.getRecord(); return false;" action="#">
-      Student addr:<br>
-      <input class='stu_addr' type="text" name="stu_addr" value="">
-      <input type="submit" value="Submit">
-    </form> 
+    <!-- <button onclick="App.addRecord(); return false;"> Add Record</button> -->
+    <div class='add_student_record'>
+      <p> Add student record </p>
+      <form class='add_record_form' onsubmit="App.addRecord(); return false;" action="#">
+        Student addr:<br>
+        <input class='stu_addr' type="text" name="stu_addr" value=""><br>
+        Student name:<br>
+        <input class='stu_name' type="text" name="stu_name" value=""><br>
+        subject 1: <input class='subject_1' type="text" name="" value="English">
+        <input class='score_1' type="text" name="" value=""> <br>
+        subject 2: <input class='subject_2' type="text" name="" value="Math">
+        <input class='score_2' type="text" name="" value=""> <br>
+        subject 3: <input class='subject_3' type="text" name="" value="Physics">
+        <input class='score_3' type="text" name="" value=""> <br>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <hr>
+    <div class='add_student_record'>
+      <p> Get student record </p>
+      <form class='get_record_form' onsubmit="App.getRecord(); return false;" action="#">
+        Student addr:<br>
+        <input class='stu_addr' type="text" name="stu_addr" value="">
+        <input type="submit" value="Submit">
+      </form> 
+      <div class='display_stu_record'>
+      </div>
+    </div>
 <!--     <button onclick="App.getRecord(); return false;"> Get Record</button>
- -->    <button onclick="App.requestAccess(); return false;"> Request Access</button>
-
+ -->    
+ <hr>
+    <div class='request_student_access'>
+        <p> Request access from student </p>
+        <form class='request_access_form' onsubmit="App.requestAccess(); return false;" action="#">
+            Student addr:<br>
+            <input class='stu_addr' type="text" name="stu_addr" value="">
+            <input type="submit" value="Submit">
+          </form>   
+    <!-- <button onclick="App.requestAccess(); return false;"> Request Access</button> -->
+    </div>
 
       
     </div>

@@ -36,7 +36,16 @@
           
         </form> -->
         <!-- <button onclick="App.addInst('0x5975026f05aAE130cA63717034D02FfC9a3eA9C5', 'inst1'); return false;">Add institution</button> -->
-        <button onclick="App.addInst('0xCc73594eb392eF5Ed46479E56e8C93D5DE883FAb', 'inst2'); return false;">Add institution</button>
+        <form class='add_inst_form' onsubmit="App.addInst(); return false;" action="#">
+          Institution addr:<br>
+          <input class='inst_addr' type="text" name="inst_addr" value=""> <br>
+          Institution name: <br>
+          <input class='inst_name' type="text" name="inst_name" value=""> <br>
+          <input type="submit" value="add Institution">
+        </form> 
+        
+        
+        <!-- <button onclick="App.addInst('0xCc73594eb392eF5Ed46479E56e8C93D5DE883FAb', 'inst2'); return false;">Add institution</button> -->
 
         <div id="my_account">
 
