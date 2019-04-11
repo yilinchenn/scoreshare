@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Institution View</title>
+  </head>
+  <body>
+    <button onclick="App.addRecord(); return false;"> Add Record</button>
+    <form class='get_record_form' onsubmit="App.getRecord(); return false;" action="#">
+      Student addr:<br>
+      <input class='stu_addr' type="text" name="stu_addr" value="">
+      <input type="submit" value="Submit">
+    </form> 
+<!--     <button onclick="App.getRecord(); return false;"> Get Record</button>
+ -->    <button onclick="App.requestAccess(); return false;"> Request Access</button>
+
+
+      
+    </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script type='text/javascript' src='js/truffle-contract.js'></script>
+      <script type='text/javascript' src='js/index.js'></script>
+    <script type='text/javascript' src='js/institution.js'></script>
+    
+  </body>
+</html>
