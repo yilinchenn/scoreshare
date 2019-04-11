@@ -114,12 +114,27 @@ App = {
 
            var hashedRecord = web3.sha3(JSON.stringify(students_json));
            console.log(hashedRecord);
+           console.log(JSON.stringify(students_json));
            App.contracts.ScoreContract.deployed().then(function(instance) {
             //console.log("call function");
             //return instance.postScoreRecord(students_json["yilin"]["address"], hashedRecord, { from: App.account });
             return instance.postScoreRecord(students_json["ma"]["address"], hashedRecord, { from: App.account });
           })
-
+           // add record to database
+           $.ajax({
+              url: "http://127.0.0.1:5000/addrecord",
+              type: "POST",
+              data: {
+                key: hashedRecord,
+                value: JSON.stringify(students_json)
+              },
+              success:function(result){
+                console.log(result)
+              },
+              error:function(error){
+                console.log('Error ${error}')
+              }
+           })
       },
 
       getRecord: function(){
@@ -132,7 +147,20 @@ App = {
             //return instance.getScoreRecord("0xAEBC5e957A949802b0c0E4503BD333b3da95912C", App.account, { from: App.account });
             return instance.getScoreRecord(stu_addr, App.account, { from: App.account });
           }).then(function(recordHash) {
-              console.log(recordHash["logs"][0]["args"]["record"]);
+              var key = recordHash["logs"][0]["args"]["record"];
+              console.log(key);
+
+              // get record from database
+              $.ajax({
+              url: "http://127.0.0.1:5000/getrecord/"+key,
+              type: "GET",
+              success:function(result){
+                console.log(result)
+              },
+              error:function(error){
+                console.log('Error ${error}')
+              }
+           })
           })
 
 

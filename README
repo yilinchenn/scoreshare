@@ -12,5 +12,21 @@ https://metamask.io/
 4. install lite-server
 npm install lite-server --save-dev
 
-3. run 
+5. deploy contract
+truffle migrate --reset
+
+6. run 
 npm run dev
+
+start gateway:
+1. set up flask (http://flask.pocoo.org/docs/0.12/installation/#installation)
+   cd gateway
+   sudo pip install virtualenv
+   virtualenv venv
+   . venv/bin/activate
+   pip install Flask
+   pip install -U flask-cors
+
+2. start gateway server
+   export FLASK_APP=server.py
+   flask run
