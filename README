@@ -1,0 +1,16 @@
+1. install truffle
+npm install -g truffle
+https://truffleframework.com/docs/truffle/getting-started/installation
+
+2. install ganache (in mem ethereum)
+https://truffleframework.com/ganache
+
+3. install metamask, connect metamask to ganache,
+import some accounts from ganache.
+https://metamask.io/
+
+4. install lite-server
+npm install lite-server --save-dev
+
+3. run 
+npm run dev
