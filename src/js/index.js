@@ -165,14 +165,19 @@ App = {
       getRecord: function(){
           //read student addr from form
           var stu_addr = $('.get_record_form').find("input.stu_addr").val();
+          var inst_addr =  $('.get_record_form').find("input.inst_addr").val();
           $('.get_record_form').find("input.stu_addr").val("");
+          $('.get_record_form').find("input.inst_addr").val("");
           $('div.display_stu_record').empty();
-          console.log(stu_addr);
+          if (inst_addr.trim() == ""){
+              inst_addr = App.account;
+          }
+          console.log("getting student: " + stu_addr + "from " + inst_addr);
 
           App.contracts.ScoreContract.deployed().then(function(instance) {
             //console.log("call function");
             //return instance.getScoreRecord("0xAEBC5e957A949802b0c0E4503BD333b3da95912C", App.account, { from: App.account });
-            return instance.getScoreRecord(stu_addr, App.account, { from: App.account });
+            return instance.getScoreRecord(stu_addr, inst_addr, { from: App.account });
           }).then(function(recordHash) {
               var key = recordHash["logs"][0]["args"]["record"];
               console.log(key);
@@ -207,7 +212,9 @@ App = {
                 console.log('Error ${error}')
               }
            })
-          })
+          }).catch(function(error){
+            alert("invalid student or institution address or no permission");
+          });
       }, 
 
       requestAccess: function(){
