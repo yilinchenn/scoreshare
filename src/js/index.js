@@ -138,7 +138,7 @@ App = {
           
           console.log(student_json)
 
-           var hashedRecord = web3.sha3(JSON.stringify(students_json));
+           var hashedRecord = web3.sha3(JSON.stringify(student_json));
            console.log("record hash: " + hashedRecord);
            App.contracts.ScoreContract.deployed().then(function(instance) {
             //console.log("call function");
@@ -151,7 +151,7 @@ App = {
               type: "POST",
               data: {
                 key: hashedRecord,
-                value: JSON.stringify(students_json)
+                value: JSON.stringify(student_json)
               },
               success:function(result){
                 console.log(result)
