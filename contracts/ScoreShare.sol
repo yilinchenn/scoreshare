@@ -31,19 +31,30 @@ contract ScoreShare {
     
     struct Institution {
         string name;
+        string url;
         bool exist;
     }
 
     // Map of approved institution
     mapping(address => Institution) public institutions;
     
+    // Constructor of the contract
+    // Contract should only be deployed by admin
     constructor() public {
         adminAddr = msg.sender;
     }
 
-    function addInstitution(address _toAdd, string calldata _name) external adminOnly {
-        institutions[_toAdd] = Institution(_name, true);
-        emit addInstitutionEvent(_toAdd);
+    // Only admin can add institution
+    function addInstitution(address _toAdd, string calldata _name, string calldata _url) external adminOnly {
+        require(institutions[_toAdd].exist == false);
+        institutions[_toAdd] = Institution(_name, _url, true);
+        emit addInstitutionEvent(_toAdd, _name, _url);
+    }
+
+    function removeInstitution(address _toRemove) external adminOnly {
+        require(institutions[_toRemove].exist);
+        delete institutions[_toRemove];
+        emit removeInstitutionEvent(_toRemove);
     }
     
     // Access Control Matrix
@@ -52,7 +63,14 @@ contract ScoreShare {
     // Record Map
     mapping(address => mapping(address => bytes32)) internal scoreRecords;
     
+
     event addInstitutionEvent (
+        address instAddr,
+        string name,
+        string url
+    );
+
+    event removeInstitutionEvent (
         address instAddr
     );
     
@@ -102,7 +120,7 @@ contract ScoreShare {
         emit recordPostEvent(msg.sender, _student, now);
     }
     
-    function getScoreRecord(address _student, address _inst) public instOnly returns(bytes32){
+    function getScoreRecord(address _student, address _inst) public view instOnly returns(bytes32){
         require(scoreAccess[msg.sender][_student] == true);
         bytes32 record = scoreRecords[_inst][_student];
         emit recordGetEvent(msg.sender, _student, record);
