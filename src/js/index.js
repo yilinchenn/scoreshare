@@ -165,6 +165,8 @@ App = {
       getRecord: function(){
           //read student addr from form
           var stu_addr = $('.get_record_form').find("input.stu_addr").val();
+          $('.get_record_form').find("input.stu_addr").val("");
+          $('div.display_stu_record').empty();
           console.log(stu_addr);
 
           App.contracts.ScoreContract.deployed().then(function(instance) {
@@ -181,6 +183,25 @@ App = {
               type: "GET",
               success:function(result){
                 console.log(result)
+                var score_table = $(score_table_template);
+                var result_dict = JSON.parse(result);
+                //console.log(Object.keys(result_dict))
+                var result_name = Object.keys(result_dict)[0];
+                score_table.find("p.stu_name").html("name: " + result_name);
+                score_table.find("p.stu_addr").html("addr: " + result_dict[result_name]["address"]);
+                for (key in result_dict[result_name]){
+                    if (key == "address"){
+                      continue;
+                    }
+                    //console.log(result_dict[result_name][key])
+                    var row = $(table_row_template);
+                    row.find("td.subj").html(key);
+                    row.find("td.mark").html(result_dict[result_name][key]);
+                    //console.log(row.html());
+                    score_table.find("tbody.scores").append(row);
+                }
+                //console.log(score_table.html())
+                $("div.display_stu_record").append(score_table);
               },
               error:function(error){
                 console.log('Error ${error}')

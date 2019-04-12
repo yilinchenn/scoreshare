@@ -12,6 +12,7 @@ const students_json =
 var score_table_template = 
 "<div class='one_stu'>\
 <p class='stu_name'></p>\
+<p class='stu_addr'></p>\
 <table> \
 <thead> \
 <tr>\
@@ -19,7 +20,7 @@ var score_table_template =
   <th>Score</th>\
 </tr>\
 </thead>\
-<tbody>\
+<tbody class='scores'>\
 </tbody>\
 </table>\
 </div"
