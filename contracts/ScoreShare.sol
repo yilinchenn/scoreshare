@@ -120,7 +120,7 @@ contract ScoreShare {
         emit recordPostEvent(msg.sender, _student, now);
     }
     
-    function getScoreRecord(address _student, address _inst) public view instOnly returns(bytes32){
+    function getScoreRecord(address _student, address _inst) public instOnly returns(bytes32){
         require(scoreAccess[msg.sender][_student] == true);
         bytes32 record = scoreRecords[_inst][_student];
         emit recordGetEvent(msg.sender, _student, record);
